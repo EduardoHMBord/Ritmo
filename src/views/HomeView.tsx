@@ -12,6 +12,7 @@ type HomeViewProps = {
   dailyProgress: DailyProgress[];
   todayDate: string;
   onGoToRoutines: () => void;
+  onGoToFocus: () => void;
   onToggleActivityCompletion: (
     routineId: string,
     activityId: string,
@@ -34,6 +35,7 @@ export function HomeView({
   dailyProgress,
   todayDate,
   onGoToRoutines,
+  onGoToFocus,
   onToggleActivityCompletion,
   onToggleSubtaskCompletion,
 }: HomeViewProps) {
@@ -55,6 +57,9 @@ export function HomeView({
         <div className="header-actions">
           <button type="button" className="secondary-button" onClick={onGoToRoutines}>
             Gerenciar rotinas
+          </button>
+          <button type="button" className="primary-button" onClick={onGoToFocus}>
+            Abrir modo simplificado
           </button>
         </div>
       </div>
@@ -194,7 +199,6 @@ export function HomeView({
           })}
         </div>
       )}
-
     </section>
   );
 }

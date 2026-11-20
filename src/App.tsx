@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppState } from "./hooks/useAppState";
 import type { AppView } from "./types";
 import { getLocalDateString } from "./utils/dates";
@@ -23,12 +23,14 @@ function App() {
   const {
     routines,
     dailyProgress,
+    preferences,
     selectedRoutine,
     loadState,
     loadError,
     saveError,
     retryLoad,
     resetAppData,
+    updatePreferences,
     createRoutine,
     updateRoutine,
     deleteRoutine,
@@ -45,6 +47,14 @@ function App() {
     toggleRoutineActivityCompletion,
     toggleRoutineSubtaskCompletion,
   } = useAppState();
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.dataset.contrast = preferences.contrast;
+    root.dataset.fontSize = preferences.fontSize;
+    root.dataset.spacing = preferences.spacing;
+    root.dataset.reducedMotion = preferences.reducedMotion ? "true" : "false";
+  }, [preferences]);
 
   function handleOpenRoutine(routineId: string): void {
     openRoutine(routineId);
@@ -110,6 +120,7 @@ function App() {
             dailyProgress={dailyProgress}
             todayDate={todayDate}
             onGoToRoutines={() => setActiveView("routines")}
+            onGoToFocus={() => setActiveView("focus")}
             onToggleActivityCompletion={toggleRoutineActivityCompletion}
             onToggleSubtaskCompletion={toggleRoutineSubtaskCompletion}
           />
@@ -140,9 +151,23 @@ function App() {
           />
         );
       case "focus":
-        return <FocusModeView />;
+        return (
+          <FocusModeView
+            routines={routines}
+            dailyProgress={dailyProgress}
+            todayDate={todayDate}
+            onGoToRoutines={() => setActiveView("routines")}
+            onToggleActivityCompletion={toggleRoutineActivityCompletion}
+            onToggleSubtaskCompletion={toggleRoutineSubtaskCompletion}
+          />
+        );
       case "settings":
-        return <SettingsView />;
+        return (
+          <SettingsView
+            preferences={preferences}
+            onUpdatePreferences={updatePreferences}
+          />
+        );
       default:
         return (
           <HomeView
@@ -150,6 +175,7 @@ function App() {
             dailyProgress={dailyProgress}
             todayDate={todayDate}
             onGoToRoutines={() => setActiveView("routines")}
+            onGoToFocus={() => setActiveView("focus")}
             onToggleActivityCompletion={toggleRoutineActivityCompletion}
             onToggleSubtaskCompletion={toggleRoutineSubtaskCompletion}
           />

@@ -39,13 +39,13 @@
 
 .app-nav-button {
   appearance: none;
-  border: 1px solid var(--color-border);
+  border: 2px solid var(--color-border);
   background: var(--color-surface);
   color: var(--color-text);
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-md);
   cursor: pointer;
-  min-height: 2.75rem;
+  min-height: var(--target-size-min);
 }
 
 .app-nav-button:hover {
@@ -56,7 +56,9 @@
   background: var(--color-nav-active-bg);
   color: var(--color-nav-active-text);
   border-color: var(--color-primary);
-  font-weight: 600;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 0.12em;
 }
 
 .app-main {
@@ -102,12 +104,14 @@
 .secondary-button,
 .danger-button {
   appearance: none;
-  border: 1px solid var(--color-border);
+  border: 2px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-2) var(--space-3);
-  min-height: 2.75rem;
+  min-height: var(--target-size-min);
+  min-width: 2.75rem;
   cursor: pointer;
   font-weight: 600;
+  line-height: 1.3;
 }
 
 .primary-button {
@@ -122,21 +126,21 @@
 }
 
 .danger-button {
-  background: #fff5f5;
-  color: #8a1c1c;
-  border-color: #e0b4b4;
+  background: var(--color-danger-bg);
+  color: var(--color-danger-text);
+  border-color: var(--color-danger-border);
 }
 
 .primary-button:hover,
 .secondary-button:hover,
 .danger-button:hover {
-  filter: brightness(0.98);
+  filter: brightness(0.97);
 }
 
 .primary-button:disabled,
 .secondary-button:disabled,
 .danger-button:disabled {
-  opacity: 0.55;
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
@@ -145,7 +149,7 @@
   border-radius: var(--radius-md);
   padding: var(--space-4);
   margin-bottom: var(--space-4);
-  background: #fbfcfd;
+  background: var(--color-surface-alt);
 }
 
 .form-field {
@@ -162,10 +166,12 @@
 
 .form-field input[type="text"],
 .form-field input[type="time"],
-.form-field textarea {
+.form-field textarea,
+.form-field select {
   width: 100%;
+  max-width: 100%;
   padding: var(--space-2) var(--space-3);
-  border: 1px solid var(--color-border);
+  border: 2px solid var(--color-border);
   border-radius: var(--radius-md);
   background: var(--color-surface);
 }
@@ -177,22 +183,34 @@
 }
 
 fieldset.form-field {
-  border: 1px solid var(--color-border);
+  border: 2px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-3);
 }
 
-.checkbox-grid {
+.checkbox-grid,
+.radio-group {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
   gap: var(--space-2);
 }
 
-.checkbox-item {
+.radio-group {
+  grid-template-columns: 1fr;
+}
+
+.checkbox-item,
+.radio-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--space-2);
   font-weight: 400;
+}
+
+.checkbox-item input,
+.radio-item input {
+  margin-top: 0.2rem;
+  flex: 0 0 auto;
 }
 
 .field-hint {
@@ -203,8 +221,8 @@ fieldset.form-field {
 
 .field-error {
   margin: 0;
-  color: #8a1c1c;
-  font-weight: 600;
+  color: var(--color-danger-text);
+  font-weight: 700;
 }
 
 .form-actions {
@@ -214,13 +232,14 @@ fieldset.form-field {
 }
 
 .empty-state {
-  border: 1px dashed var(--color-border);
+  border: 2px dashed var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-5);
   text-align: center;
 }
 
-.empty-state .primary-button {
+.empty-state .primary-button,
+.empty-state .secondary-button {
   margin-top: var(--space-2);
 }
 
@@ -292,6 +311,7 @@ fieldset.form-field {
 
 .subtask-title {
   flex: 1 1 12rem;
+  overflow-wrap: anywhere;
 }
 
 .subtask-actions {
@@ -312,7 +332,7 @@ fieldset.form-field {
 .subtask-add-row input {
   flex: 1 1 12rem;
   padding: var(--space-2) var(--space-3);
-  border: 1px solid var(--color-border);
+  border: 2px solid var(--color-border);
   border-radius: var(--radius-md);
 }
 
@@ -337,11 +357,11 @@ fieldset.form-field {
 .save-error-banner {
   margin: 0 0 var(--space-4);
   padding: var(--space-3);
-  border: 1px solid #e0b4b4;
+  border: 2px solid var(--color-danger-border);
   border-radius: var(--radius-md);
-  background: #fff5f5;
-  color: #8a1c1c;
-  font-weight: 600;
+  background: var(--color-danger-bg);
+  color: var(--color-danger-text);
+  font-weight: 700;
 }
 
 .home-routines {
@@ -412,6 +432,61 @@ fieldset.form-field {
   margin-bottom: 0;
 }
 
+.focus-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.focus-position {
+  font-weight: 700;
+  margin-bottom: var(--space-3);
+}
+
+.focus-activity {
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  margin-bottom: var(--space-4);
+  background: var(--color-surface-alt);
+}
+
+.focus-activity h2 {
+  margin-bottom: var(--space-2);
+}
+
+.focus-steps {
+  margin-top: var(--space-3);
+}
+
+.focus-steps ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.focus-step-item {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-2);
+  background: var(--color-surface);
+}
+
+.speech-controls {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.speech-status {
+  margin-bottom: var(--space-2);
+}
+
 @media (max-width: 40rem) {
   .app-header {
     padding: var(--space-3);
@@ -437,7 +512,8 @@ fieldset.form-field {
   .view-header,
   .header-actions,
   .item-actions,
-  .form-actions {
+  .form-actions,
+  .focus-controls {
     flex-direction: column;
     align-items: stretch;
   }

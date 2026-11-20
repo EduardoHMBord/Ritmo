@@ -454,6 +454,15 @@ export function useAppState() {
     }));
   }
 
+  function updatePreferences(
+    patch: Partial<AppData["preferences"]>,
+  ): void {
+    updateAppData((current) => ({
+      ...current,
+      preferences: { ...current.preferences, ...patch },
+    }));
+  }
+
   return {
     appData,
     loadState,
@@ -466,6 +475,7 @@ export function useAppState() {
     selectedRoutineId,
     retryLoad,
     resetAppData,
+    updatePreferences,
     createRoutine,
     updateRoutine,
     deleteRoutine,
