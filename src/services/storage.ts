@@ -199,7 +199,9 @@ function parsePreferences(value: unknown): AccessibilityPreferences | null {
   return { fontSize, contrast, spacing, reducedMotion };
 }
 
-function parseAppData(value: unknown): AppData | { incompatible: true } | null {
+export function parseAppData(
+  value: unknown,
+): AppData | { incompatible: true } | null {
   if (!isRecord(value)) return null;
 
   if (!isNumber(value.schemaVersion)) return null;

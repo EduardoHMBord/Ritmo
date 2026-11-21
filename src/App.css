@@ -80,6 +80,51 @@
   padding: var(--space-5);
 }
 
+.settings-panel + .settings-panel {
+  margin-top: var(--space-5);
+}
+
+.backup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.backup-file-field {
+  flex: 1 1 18rem;
+  margin-bottom: 0;
+}
+
+.backup-file-input {
+  width: 100%;
+  max-width: 100%;
+  padding: var(--space-2);
+  min-height: var(--target-size-min);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.backup-status {
+  padding: var(--space-3);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-weight: 700;
+}
+
+.backup-status--error {
+  border-color: var(--color-danger-border);
+  background: var(--color-danger-bg);
+  color: var(--color-danger-text);
+}
+
+.backup-status--success {
+  border-color: var(--color-success-text);
+  color: var(--color-success-text);
+}
+
 .view-header {
   display: flex;
   flex-wrap: wrap;
@@ -513,6 +558,7 @@ fieldset.form-field {
   .header-actions,
   .item-actions,
   .form-actions,
+  .backup-actions,
   .focus-controls {
     flex-direction: column;
     align-items: stretch;

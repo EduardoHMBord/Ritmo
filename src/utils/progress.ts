@@ -79,7 +79,6 @@ export function toggleActivityCompletion(
     return dailyProgress;
   }
 
-  // Atividades com etapas têm conclusão derivada das etapas.
   if (activity.subtasks.length > 0) {
     return dailyProgress;
   }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAppState } from "./hooks/useAppState";
-import type { AppView } from "./types";
+import { downloadBackupFile } from "./services/backup";
+import type { AppData, AppView } from "./types";
 import { getLocalDateString } from "./utils/dates";
 import { ActivitiesView } from "./views/ActivitiesView";
 import { FocusModeView } from "./views/FocusModeView";
@@ -21,6 +22,7 @@ function App() {
   const [activeView, setActiveView] = useState<AppView>("home");
   const [todayDate] = useState(() => getLocalDateString());
   const {
+    appData,
     routines,
     dailyProgress,
     preferences,
@@ -30,6 +32,7 @@ function App() {
     saveError,
     retryLoad,
     resetAppData,
+    importBackupData,
     updatePreferences,
     createRoutine,
     updateRoutine,
@@ -73,6 +76,21 @@ function App() {
     if (confirmed) {
       resetAppData();
     }
+  }
+
+  function handleExportBackup(): boolean {
+    return downloadBackupFile(appData).ok;
+  }
+
+  function handleImportBackup(data: AppData): boolean {
+    const confirmed = window.confirm(
+      "Importar o backup selecionado? Todas as rotinas, atividades, etapas, progressos e preferências atuais serão substituídos pelos dados do arquivo. Esta ação não pode ser desfeita. Continuar?",
+    );
+    if (!confirmed) {
+      return false;
+    }
+    importBackupData(data);
+    return true;
   }
 
   function renderMainContent() {
@@ -166,6 +184,8 @@ function App() {
           <SettingsView
             preferences={preferences}
             onUpdatePreferences={updatePreferences}
+            onExportBackup={handleExportBackup}
+            onImportBackup={handleImportBackup}
           />
         );
       default:

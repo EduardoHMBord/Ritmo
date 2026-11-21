@@ -153,6 +153,18 @@ export function useAppState() {
     setCanPersist(true);
   }
 
+  function importBackupData(data: AppData): void {
+    setAppData({
+      ...data,
+      dailyProgress: cleanupDailyProgress(data.dailyProgress, data.routines),
+    });
+    setSelectedRoutineId(null);
+    setLoadError(null);
+    setSaveError(null);
+    setLoadState("ready");
+    setCanPersist(true);
+  }
+
   function updateAppData(updater: (current: AppData) => AppData): void {
     setAppData((current) => {
       const next = updater(current);
@@ -475,6 +487,7 @@ export function useAppState() {
     selectedRoutineId,
     retryLoad,
     resetAppData,
+    importBackupData,
     updatePreferences,
     createRoutine,
     updateRoutine,
