@@ -48,10 +48,6 @@ function isNumber(value: unknown): value is number {
   return typeof value === "number" && Number.isFinite(value);
 }
 
-function isBoolean(value: unknown): value is boolean {
-  return typeof value === "boolean";
-}
-
 function isWeekday(value: unknown): value is Weekday {
   return isString(value) && (VALID_WEEKDAYS as string[]).includes(value);
 }
@@ -181,7 +177,6 @@ function parsePreferences(value: unknown): AccessibilityPreferences | null {
   const fontSize = value.fontSize;
   const contrast = value.contrast;
   const spacing = value.spacing;
-  const reducedMotion = value.reducedMotion;
 
   if (fontSize !== "normal" && fontSize !== "large" && fontSize !== "extra-large") {
     return null;
@@ -192,11 +187,7 @@ function parsePreferences(value: unknown): AccessibilityPreferences | null {
   if (spacing !== "standard" && spacing !== "increased") {
     return null;
   }
-  if (!isBoolean(reducedMotion)) {
-    return null;
-  }
-
-  return { fontSize, contrast, spacing, reducedMotion };
+  return { fontSize, contrast, spacing };
 }
 
 export function parseAppData(

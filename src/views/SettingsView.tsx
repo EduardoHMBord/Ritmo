@@ -182,35 +182,6 @@ export function SettingsView({
             </div>
           </fieldset>
 
-          <fieldset className="form-field">
-            <legend>Movimento</legend>
-            <div className="radio-group">
-              <label className="radio-item">
-                <input
-                  type="radio"
-                  name="reducedMotion"
-                  value="off"
-                  checked={!preferences.reducedMotion}
-                  onChange={() => onUpdatePreferences({ reducedMotion: false })}
-                />
-                <span>Permitir animações e transições</span>
-              </label>
-              <label className="radio-item">
-                <input
-                  type="radio"
-                  name="reducedMotion"
-                  value="on"
-                  checked={preferences.reducedMotion}
-                  onChange={() => onUpdatePreferences({ reducedMotion: true })}
-                />
-                <span>Reduzir movimento</span>
-              </label>
-            </div>
-            <p className="field-hint">
-              O aplicativo também respeita a preferência de redução de movimento
-              do seu sistema, quando disponível.
-            </p>
-          </fieldset>
         </form>
       </section>
 

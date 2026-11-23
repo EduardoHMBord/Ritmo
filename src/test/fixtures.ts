@@ -46,7 +46,6 @@ export function makeTestData(): AppData {
       fontSize: "normal",
       contrast: "standard",
       spacing: "standard",
-      reducedMotion: false,
     },
   };
 }

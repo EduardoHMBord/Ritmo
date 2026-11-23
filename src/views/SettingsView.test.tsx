@@ -9,7 +9,6 @@ const PREFERENCES: AccessibilityPreferences = {
   fontSize: "normal",
   contrast: "standard",
   spacing: "standard",
-  reducedMotion: false,
 };
 
 function renderSettings(onImportBackup: (data: AppData) => boolean) {

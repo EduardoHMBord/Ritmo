@@ -44,7 +44,6 @@ export type AccessibilityPreferences = {
   fontSize: "normal" | "large" | "extra-large";
   contrast: "standard" | "high";
   spacing: "standard" | "increased";
-  reducedMotion: boolean;
 };
 
 export type AppData = {

@@ -56,7 +56,6 @@ function App() {
     root.dataset.contrast = preferences.contrast;
     root.dataset.fontSize = preferences.fontSize;
     root.dataset.spacing = preferences.spacing;
-    root.dataset.reducedMotion = preferences.reducedMotion ? "true" : "false";
   }, [preferences]);
 
   function handleOpenRoutine(routineId: string): void {
